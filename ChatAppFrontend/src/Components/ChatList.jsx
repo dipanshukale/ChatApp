@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import { FiArrowLeft, FiPlus, FiX } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
 
-const socket = io("http://localhost:8000", {
+const socket = io("https://chatapp-backend-46f1.onrender.com", {
   transports: ["websocket", "polling"],
   withCredentials: true,
 });
@@ -19,7 +19,7 @@ export const ChatList = () => {
 
   const fetchChatUsers = async () => {
     try {
-      const response = await fetch("http://localhost:8000/following-list", {
+      const response = await fetch("https://chatapp-backend-46f1.onrender.com/following-list", {
         method: "GET",
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
@@ -27,7 +27,7 @@ export const ChatList = () => {
       const data = await response.json();
 
       // Fetch unread messages count
-      const unreadResponse = await fetch("http://localhost:8000/messages/unread", {
+      const unreadResponse = await fetch("https://chatapp-backend-46f1.onrender.com/messages/unread", {
         method: "GET",
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
@@ -79,7 +79,7 @@ export const ChatList = () => {
       )
     );
 
-    fetch(`http://localhost:8000/messages/mark-as-read/${chatUser._id}`, {
+    fetch(`https://chatapp-backend-46f1.onrender.com/messages/mark-as-read/${chatUser._id}`, {
       method: "PUT",
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
@@ -141,14 +141,14 @@ export const ChatPage = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/messages/${selectedUser._id}`, {
+      const response = await fetch(`https://chatapp-backend-46f1.onrender.com/messages/${selectedUser._id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       if (!response.ok) throw new Error("Failed to fetch messages");
       const data = await response.json();
       setMessages(data);
       
-      await fetch(`http://localhost:8000/messages/mark-as-read/${selectedUser._id}`, {
+      await fetch(`https://chatapp-backend-46f1.onrender.com/messages/mark-as-read/${selectedUser._id}`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
@@ -167,7 +167,7 @@ export const ChatPage = () => {
   formData.append("image", file);
 
   try {
-    const response = await fetch("http://localhost:8000/upload", {
+    const response = await fetch("https://chatapp-backend-46f1.onrender.com/upload", {
       method: "POST",
       body: formData,
     });
@@ -228,7 +228,7 @@ if (!selectedUser || !selectedUser._id) {
     if (image) formData.append("image", image);
 
     try {
-      const response = await fetch("http://localhost:8000/send", {
+      const response = await fetch("https://chatapp-backend-46f1.onrender.com/send", {
         method: "POST",
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         body: formData,
