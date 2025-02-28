@@ -25,7 +25,7 @@ const ProfilePage = () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No authentication token found");
 
-      const response = await fetch("http://localhost:8000/update-profile", {
+      const response = await fetch("https://chatapp-backend-46f1.onrender.com/update-profile", {
         method: "PUT",
         headers: { 
           "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const ProfilePage = () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const response = await fetch("http://localhost:8000/logout", {
+      const response = await fetch("https://chatapp-backend-46f1.onrender.com/logout", {
         method: "POST",
         headers: { 
           "Authorization": `Bearer ${token}` 
