@@ -288,7 +288,7 @@ if (!selectedUser || !selectedUser._id) {
             {msg.image ? (
               <img src={msg.image} alt="Sent" className="max-w-xs rounded-lg mb-2" />
             ) : (
-              <p className={`p-2 rounded-lg text-sm max-w-xs mb-1.5 ${msg.sender === user.id ? "bg-blue-500 text-white" : "bg-white"}`}>{msg.message}</p>
+              <p className={`p-2 rounded-lg text-sm max-w-xs mb-12 ${msg.sender === user.id ? "bg-blue-500 text-white" : "bg-white"}`}>{msg.message}</p>
             )}
           </div>
         ))}
