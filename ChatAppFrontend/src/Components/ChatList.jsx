@@ -115,7 +115,7 @@ export const ChatList = () => {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500">No following users found.</p>
+          <p className="text-center text-gray-500">Loading...</p>
         )}
       </div>
     </div>
