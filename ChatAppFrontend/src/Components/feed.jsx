@@ -11,7 +11,7 @@ const Home = () => {
 
 	useEffect(() => {
 		const fetchMessagesCount = () => {
-			fetch("http://localhost:8000/messages/unread", {
+			fetch("https://chatapp-backend-46f1.onrender.com/messages/unread", {
 				method: "GET",
 				credentials: "include",
 				headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -29,7 +29,7 @@ const Home = () => {
 
 	// Fetch users & following list
 	useEffect(() => {
-		fetch("http://localhost:8000/users", {
+		fetch("https://chatapp-backend-46f1.onrender.com/users", {
 			method: "GET",
 			credentials: "include",
 			headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -37,7 +37,7 @@ const Home = () => {
 			.then((res) => res.json())
 			.then((data) => setUsers(data));
 
-		fetch("http://localhost:8000/profile", {
+		fetch("https://chatapp-backend-46f1.onrender.com/profile", {
 			method: "GET",
 			credentials: "include",
 			headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -47,7 +47,7 @@ const Home = () => {
 	}, []);
 
 	const handleFollow = async (id) => {
-		await fetch(`http://localhost:8000/follow/${id}`, {
+		await fetch(`https://chatapp-backend-46f1.onrender.com/follow/${id}`, {
 			method: "POST",
 			credentials: "include",
 			headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
