@@ -134,6 +134,35 @@ export const ChatPage = () => {
 
 
   useEffect(() => {
+    const disableZoom = (event) => {
+      if (event.ctrlKey || event.deltaY) {
+        event.preventDefault();
+      }
+    };
+
+    const disablePinchZoom = (event) => {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener("wheel", disableZoom, { passive: false });
+    document.addEventListener("keydown", (event) => {
+      if (event.ctrlKey && (event.key === "+" || event.key === "-")) {
+        event.preventDefault();
+      }
+    });
+    document.addEventListener("touchmove", disablePinchZoom, { passive: false });
+
+    return () => {
+      document.removeEventListener("wheel", disableZoom);
+      document.removeEventListener("keydown", disableZoom);
+      document.removeEventListener("touchmove", disablePinchZoom);
+    };
+  }, []);
+
+
+  useEffect(() => {
   if (!user || !selectedUser) return;
 
   const room = [user.id, selectedUser._id].sort().join("-");
