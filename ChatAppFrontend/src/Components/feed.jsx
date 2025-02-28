@@ -70,7 +70,7 @@ const Home = () => {
 						/>
 					))
 				) : (
-					<p className="text-center text-gray-500 bg-black">No users found.</p>
+					<p className="text-center text-gray-500 bg-black">Loading...</p>
 				)}
 			</div>
 
