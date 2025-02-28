@@ -3,7 +3,7 @@ import express from "express";
 import { config } from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Server } from "socket.io";
 import http from "http";
