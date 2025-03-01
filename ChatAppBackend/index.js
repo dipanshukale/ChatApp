@@ -309,9 +309,6 @@ app.put("/messages/mark-as-read/:senderId", authenticate, async (req, res) => {
 	}
 });
 
-
-
-
 app.get("/messages/:receiverId", authenticate, async (req, res) => {
 	try {
 		const messages = await Message.find({
@@ -325,6 +322,26 @@ app.get("/messages/:receiverId", authenticate, async (req, res) => {
 		res.status(500).json({ message: "Error fetching messages" });
 	}
 });
+
+//clear chats
+app.delete("/messages/delete-all/:receiverId", async (req, res) => {
+  try {
+    const { receiverId } = req.params;
+    const senderId = req.user.id; // Get logged-in user ID
+
+    await Message.deleteMany({
+      $or: [
+        { sender: senderId, receiver: receiverId },
+        { sender: receiverId, receiver: senderId }
+      ]
+    });
+
+    res.json({ success: true, message: "All messages deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete messages" });
+  }
+});
+
 
 // Start server
 const PORT = process.env.PORT || 8000;
