@@ -311,14 +311,14 @@ if (!selectedUser || !selectedUser._id) {
       <div className="flex items-center p-4 bg-black shadow">
         <FiArrowLeft className="text-2xl cursor-pointer text-white" onClick={() => navigate("/messages")} />
         <h2 className="text-white flex items-center text-lg font-bold ml-4"> <img src={selectedUser.profilePicture } className="w-8 h-8 mr-2 rounded-full"/> {selectedUser?.username || "Chat"}</h2>
+      <button
+		onClick={deleteAllChats}
+		className="flex items-center ml-20  bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-700 transition"
+	  >
+		<FiTrash2 className="mr-2" />
+		Clear Chat
+	</button>
       </div>
-       <button
-      onClick={deleteAllChats}
-      className="flex items-center bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-700 transition"
-    >
-      <FiTrash2 className="mr-2" />
-      Clear Chat
-    </button>
       <div className="flex-1 overflow-y-auto p-4">
         {messages.map((msg, index) => (
           <div key={index} className={`flex ${msg.sender === user.id ? "justify-end" : "justify-start"}`}>
