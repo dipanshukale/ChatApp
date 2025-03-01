@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
 import { FiArrowLeft, FiPlus, FiX } from "react-icons/fi";
@@ -132,6 +132,7 @@ export const ChatPage = () => {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const disableZoom = (event) => {
@@ -284,6 +285,7 @@ if (!selectedUser || !selectedUser._id) {
     setMessageText("");
     setImage(null);
     setPreview(null);
+    scrollToBottom();
   };
 
   return (
@@ -302,6 +304,7 @@ if (!selectedUser || !selectedUser._id) {
             )}
           </div>
         ))}
+        <div ref={messagesEndRef}></div>
       </div>
       <div className="chat-input flex p-4 bg-black shadow">
 
