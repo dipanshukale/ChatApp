@@ -55,7 +55,7 @@ const ProfilePage = () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No authentication token found");
 
-      const response = await fetch("http://localhost:8000/upload-profile-pic", {
+      const response = await fetch("https://chatapp-backend-46f1.onrender.com/upload-profile-pic", {
         method: "POST",
         body: formData,
         headers: {
