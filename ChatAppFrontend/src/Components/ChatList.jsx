@@ -312,9 +312,9 @@ if (!selectedUser || !selectedUser._id) {
         <FiArrowLeft className="text-2xl cursor-pointer text-white" onClick={() => navigate("/messages")} />
         <h2 className="text-white flex items-center text-lg font-bold ml-4"> <img src={selectedUser.profilePicture } className="w-8 h-8 mr-2 rounded-full"/> {selectedUser?.username || "Chat"}</h2>
       <button
-		onClick={deleteAllChats}
-		className="flex items-center ml-20  bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-700 transition"
-	  >
+	onClick={deleteAllChats}
+	className="flex items-center ml-16  bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-700 transition"
+	>
 		<FiTrash2 className="mr-2" />
 		Clear Chat
 	</button>
