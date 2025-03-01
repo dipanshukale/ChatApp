@@ -1,6 +1,7 @@
 import React, { useEffect, useState,useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
+import { FiTrash2 } from "react-icons/fi";
 import { FiArrowLeft, FiPlus, FiX } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
 
@@ -288,12 +289,36 @@ if (!selectedUser || !selectedUser._id) {
     scrollToBottom();
   };
 
+  const deleteAllChats = async () => {
+  if (!window.confirm("Are you sure you want to delete all messages?")) return;
+
+  try {
+    const response = await fetch(`https://chatapp-backend-46f1.onrender.com/messages/delete-all/${selectedUser._id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+
+    if (!response.ok) throw new Error("Failed to delete chats");
+    
+    setMessages([]); // Clear UI messages
+  } catch (error) {
+    console.error("Error deleting chats:", error);
+  }
+};
+
   return (
     <div className="flex flex-col h-[calc(100vh-56px)] bg-black">
       <div className="flex items-center p-4 bg-black shadow">
         <FiArrowLeft className="text-2xl cursor-pointer text-white" onClick={() => navigate("/messages")} />
         <h2 className="text-white flex items-center text-lg font-bold ml-4"> <img src={selectedUser.profilePicture } className="w-8 h-8 mr-2 rounded-full"/> {selectedUser?.username || "Chat"}</h2>
       </div>
+       <button
+      onClick={deleteAllChats}
+      className="flex items-center bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-700 transition"
+    >
+      <FiTrash2 className="mr-2" />
+      Clear Chat
+    </button>
       <div className="flex-1 overflow-y-auto p-4">
         {messages.map((msg, index) => (
           <div key={index} className={`flex ${msg.sender === user.id ? "justify-end" : "justify-start"}`}>
