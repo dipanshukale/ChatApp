@@ -161,6 +161,16 @@ export const ChatPage = () => {
     };
   }, []);
 
+  // Scroll to bottom function
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Scroll messages update
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
 
   useEffect(() => {
   if (!user || !selectedUser) return;
